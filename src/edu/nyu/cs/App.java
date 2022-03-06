@@ -49,32 +49,8 @@ public class App extends PApplet {
 	 */
 	public void keyPressed() {
 		// System.out.println("Key pressed: " + key);
-		switch (key) {
-			case '1':
-				// show the morning pedestrian counts in May 2021
-				showMay2021MorningCounts(data);
-				break;
-			case '2':
-				// show the evening pedestrian counts in May 2021
-				showMay2021EveningCounts(data);
-				break;
-			case '3':
-				// show the difference between evening and morning pedestrian counts in May 2021
-				showMay2021EveningMorningCountsDifference(data);
-				break;
-			case '4':
-				// show the difference between evening and morning pedestrian counts in May 2021
-				showMay2021VersusMay2019Counts(data);
-				break;
-			case '5':
-				// shows a data visualization of your choosing
-				customVisualization1(data);
-				break;
-			case '6':
-				// shows a data visualization of your choosing
-				customVisualization2(data);
-				break;
-		}
+		// complete this method
+
 	}
 
 	/**
@@ -85,38 +61,19 @@ public class App extends PApplet {
 	 */
 	public void showMay2021MorningCounts(String[][] data) {
 		clearMap(); // clear any markers previously placed on the map
-		// remove the example code below and replace with your own code that solves the problem
 
+		// complete this method - DELETE THE EXAMPLE CODE BELOW
+
+		// remove the code below and replace with your own code that solves the problem indicated in the comments
 		// example of how to create a marker at a specific location and place it on the map
-		// float lat = 40.737375365084105f;
-		// float lng = -74.00101207586745;
-		// Location markerLocation = new Location(lat, lng);
-		// int pedestrianCount = 1024; // a make-believe pedestrian count for example
-		// float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		// float[] markerColor = {255, 0, 0, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		// MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		// map.addMarker(marker);
-		
-
-		// add markers based on data in each line of file
-		for (String[] row : data) {
-			// create a Location object, based on this row's latitude and longitude
-			float lng = Float.parseFloat(row[0]); // the first field in each inner array is the latitude
-			float lat = Float.parseFloat(row[1]); // the second field in each inner array is the longitude
-			Location location = new Location(lat, lng); // create a new Location object for this location
-
-			// calculate the radius of the marker, based on the pedestrian count and scale factor
-			float count = Float.parseFloat(row[row.length-3]); // get third-to-last value in the array, which is the evening count for this month
-			float radius = count * SCALE_FACTOR; // scale down the radius of the marker so it's not huge... feel free to adjust this size
-
-			// create the marker
-			float[] fillColor = {0, 0, 255, 127}; // a color: red, green, blue, and alpha (transparency), each represented as numbers between 0 and 255
-			MarkerBubble marker = new MarkerBubble(this, location, radius, fillColor);
-			// MarkerBubble marker = new MarkerBubble(this, location, radius); // an alternative that uses the default color (red)
-			// MarkerImage marker = new MarkerImage(this, location); // an alternative kind of marker using an image file instead of a circle
-			// MarkerImage marker = new MarkerImage(this, location, "images/marker_blug.png"); // an image marker with a custom image... try your own image files!
-			map.addMarker(marker); // add marker to the map
-		}
+		float lat = 40.737375365084105f; // latitude of a location of interest
+		float lng = -74.00101207586745f; // longitude of a location of interest
+		Location markerLocation = new Location(lat, lng); // create a Location object
+		int pedestrianCount = 11024; // an example pedestrian count (in reality, you will get these from a file)
+		float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
+		float[] markerColor = {255, 0, 0, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
+		MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
+		map.addMarker(marker);
 	}
 
 	/**
@@ -127,37 +84,7 @@ public class App extends PApplet {
 	 */
 	public void showMay2021EveningCounts(String[][] data) {
 		clearMap(); // clear any markers previously placed on the map
-		// remove the example code below and replace with your own code that solves the problem
-
-		// example of how to create a marker at a specific location and place it on the map
-		// float lat = 40.7286683f;
-		// float lng = -73.9978953f;
-		// Location markerLocation = new Location(lat, lng);
-		// int pedestrianCount = 3021; // a make-believe pedestrian count for example
-		// float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		// float[] markerColor = {0, 0, 255, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		// MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		// map.addMarker(marker);
-		
-		// add markers based on data in each line of file
-		for (String[] row : data) {
-			// create a Location object, based on this row's latitude and longitude
-			float lng = Float.parseFloat(row[0]); // the first field in each inner array is the latitude
-			float lat = Float.parseFloat(row[1]); // the second field in each inner array is the longitude
-			Location location = new Location(lat, lng); // create a new Location object for this location
-
-			// calculate the radius of the marker, based on the pedestrian count and scale factor
-			float count = Float.parseFloat(row[row.length-2]); // get second-to-last value in the array, which is the evening count for this month
-			float radius = count * SCALE_FACTOR; // scale down the radius of the marker so it's not huge... feel free to adjust this size
-
-			// create the marker
-			float[] fillColor = {0, 0, 255, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-			MarkerBubble marker = new MarkerBubble(this, location, radius, fillColor);
-			// MarkerBubble marker = new MarkerBubble(this, location, radius); // an alternative that uses the default color (red)
-			// MarkerImage marker = new MarkerImage(this, location); // an alternative kind of marker using an image file instead of a circle
-			// MarkerImage marker = new MarkerImage(this, location, "images/marker_blug.png"); // an image marker with a custom image... try your own image files!
-			map.addMarker(marker); // add marker to the map
-		}
+		// complete this method
 	}
 
 	/**
@@ -167,48 +94,7 @@ public class App extends PApplet {
 	 */
 	public void showMay2021EveningMorningCountsDifference(String[][] data) {
 		clearMap(); // clear any markers previously placed on the map
-		// remove the example code below and replace with your own code that solves the problem
-
-		// example of how to create a marker at a specific location and place it on the map
-		// float lat = 40.725575435557545f;
-		// float lng = -74.00224366683977f;
-		// Location markerLocation = new Location(lat, lng);
-		// int difference = 4019; // a make-believe morning/evening pedestrian count difference for example
-		// float markerRadius = difference * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		// float[] markerColor = {0, 0, 255, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		// MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		// map.addMarker(marker);
-		
-		// add markers based on data in each line of file
-		for (String[] row : data) {
-			// create a Location object, based on this row's latitude and longitude
-			float lng = Float.parseFloat(row[0]); // the first field in each inner array is the latitude
-			float lat = Float.parseFloat(row[1]); // the second field in each inner array is the longitude
-			Location location = new Location(lat, lng); // create a new Location object for this location
-
-			// calculate the radius of the marker, based on the pedestrian count and scale factor
-			float morningCount = Float.parseFloat(row[row.length-3]); // get third-to-last value in the array, which is the morning count for this month
-			float eveningCount = Float.parseFloat(row[row.length-2]); // get second-to-last value in the array, which is the evening count for this month
-			float difference = Math.abs(eveningCount - morningCount);
-
-			float[] fillColor;
-			float[] positiveFillColor = {0, 255, 0, 127};
-			float[] negativeFillColor = {255, 0, 0, 127};
-			if (eveningCount >= morningCount) {
-				fillColor = positiveFillColor; 
-			}
-			else {
-				fillColor = negativeFillColor; 
-			}
-			float radius = difference * SCALE_FACTOR; // scale down the radius of the marker so it's not huge... feel free to adjust this size
-
-			// create the marker
-			MarkerBubble marker = new MarkerBubble(this, location, radius, fillColor);
-			// MarkerBubble marker = new MarkerBubble(this, location, radius); // an alternative that uses the default color (red)
-			// MarkerImage marker = new MarkerImage(this, location); // an alternative kind of marker using an image file instead of a circle
-			// MarkerImage marker = new MarkerImage(this, location, "images/marker_blug.png"); // an image marker with a custom image... try your own image files!
-			map.addMarker(marker); // add marker to the map
-		}
+		// complete this method
 	}
 
 	/**
@@ -220,57 +106,7 @@ public class App extends PApplet {
 	 */
 	public void showMay2021VersusMay2019Counts(String[][] data) {
 		clearMap(); // clear any markers previously placed on the map
-		// remove the example code below and replace with your own code that solves the problem
-
-		// example of how to create a marker at a specific location and place it on the map
-		// float lat = 40.7286683f;
-		// float lng = -73.9978953f;
-		// Location markerLocation = new Location(lat, lng);
-		// int avgDifference = 8033; // a make-believe pedestrian count difference for example
-		// float markerRadius = avgDifference * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		// float[] markerColor = {0, 255, 0, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		// MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		// map.addMarker(marker);
-		
-		// add markers based on data in each line of file
-		for (String[] row : data) {
-			// create a Location object, based on this row's latitude and longitude
-			float lng = Float.parseFloat(row[0]); // the first field in each inner array is the latitude
-			float lat = Float.parseFloat(row[1]); // the second field in each inner array is the longitude
-			Location location = new Location(lat, lng); // create a new Location object for this location
-
-			// calculate the radius of the marker, based on the pedestrian count and scale factor
-			if (!(row[row.length-3].equals("") || row[row.length-2].equals("") || row[row.length-9].equals("") || row[row.length-8].equals(""))) {
-				float may2021MorningCount = Float.parseFloat(row[row.length-3]); // get third-to-last value in the array, which is the morning count for this month
-				float may2021EveningCount = Float.parseFloat(row[row.length-2]); // get second-to-last value in the array, which is the evening count for this month
-				float may2021Avg = (may2021EveningCount + may2021MorningCount) / 2;
-
-				float may2019MorningCount = Float.parseFloat(row[row.length-9]); // get third-to-last value in the array, which is the morning count for this month
-				float may2019EveningCount = Float.parseFloat(row[row.length-8]); // get second-to-last value in the array, which is the evening count for this month
-				float may2019Avg = (may2019EveningCount + may2019MorningCount) / 2;
-
-				float difference = Math.abs(may2021Avg - may2019Avg);
-
-				float[] fillColor;
-				float[] positiveFillColor = {0, 255, 0, 127};
-				float[] negativeFillColor = {255, 0, 0, 127};
-				if (may2021Avg >= may2019Avg) {
-					fillColor = positiveFillColor; 
-				}
-				else {
-					fillColor = negativeFillColor; 
-				}
-				float radius = difference * SCALE_FACTOR; // scale down the radius of the marker so it's not huge... feel free to adjust this size
-
-				// create the marker
-				MarkerBubble marker = new MarkerBubble(this, location, radius, fillColor);
-				// MarkerBubble marker = new MarkerBubble(this, location, radius); // an alternative that uses the default color (red)
-				// MarkerImage marker = new MarkerImage(this, location); // an alternative kind of marker using an image file instead of a circle
-				// MarkerImage marker = new MarkerImage(this, location, "images/marker_blug.png"); // an image marker with a custom image... try your own image files!
-				map.addMarker(marker); // add marker to the map
-
-			}
-		}
+		// complete this method
 	}
 
 	/**
@@ -281,17 +117,7 @@ public class App extends PApplet {
 	 */
 	public void customVisualization1(String[][] data) {
 		clearMap(); // clear any markers previously placed on the map
-		// remove the example code below and replace with your own code that solves the problem
-
-		// example of how to create a marker at a specific location and place it on the map
-		float lat = 40.7472389f;
-		float lng = -73.983934f;
-		Location markerLocation = new Location(lat, lng);
-		int pedestrianCount = 32021; // a make-believe pedestrian count for example
-		float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		float[] markerColor = {129, 60, 84, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		map.addMarker(marker);		
+		// complete this method		
 	}
 
 	/**
@@ -302,18 +128,7 @@ public class App extends PApplet {
 	 */
 	public void customVisualization2(String[][] data) {
 		clearMap(); // clear any markers previously placed on the map
-		// remove the example code below and replace with your own code that solves the problem
-
-		// example of how to create a marker at a specific location and place it on the map
-		float lat = 40.7286683f;
-		float lng = -73.9978953f;
-		Location markerLocation = new Location(lat, lng);
-		int pedestrianCount = 20122; // a make-believe pedestrian count for example
-		float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		float[] markerColor = {0, 127, 255, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		map.addMarker(marker);
-		
+		// complete this method	
 	}
 
 	/**
@@ -324,18 +139,7 @@ public class App extends PApplet {
 	 * @throws FileNotFoundException
 	 */
 	public String[] getLinesFromFile(String filepath) {
-		// complete this method so it solves the problem
-		String text  = "";
-		try {
-			Scanner scn = new Scanner(new File (filepath));
-			while (scn.hasNextLine()) {
-				text += scn.nextLine() + "\n";
-			}
-		}
-		catch (Exception e) {
-			System.out.println(String.format("Error: %s", e));
-		}
-		return text.split("\n");
+		// complete this method
 	}
 
 	/**
@@ -348,52 +152,18 @@ public class App extends PApplet {
 	 * @return A two-dimensional String array, where each inner array contains the data from one of the lines, split by commas.
 	 */
 	public String[][] getDataFromLines(String[] lines) {
-		// complete this method so it solves the problem
-		String[][] allLines = new String[0][]; // make a new empty array that will hold data from all lines that have geospatial data
-		// loop through all lines
-		for (String line : lines) {
-			String[] lineData = line.split(","); // get an array of data from the line
-			String pointData = lineData[0]; // grab the first field, which shoudl contain geospatial point data
-            Pattern p = Pattern.compile("POINT \\((.*)? (.*)?\\)");
-            Matcher m = p.matcher(pointData);
-			// check whether the line indeed has point data
-			if (m.find()) {
-                // the line has point data... keep it
-                String lng = m.group(1); // grab the longitutde from the regex match
-                String lat = m.group(2); // grab the latitude from the regex match
+		// complete this method - DELETE THE EXAMPLE CODE BELOW
 
-				// copy this line's data into a new array that includes the lat and lng and excludes the original Point info
-				String[] newLineData = new String[lineData.length + 1]; // an array one bigger than the original
-				newLineData[0] = lng;
-				newLineData[1] = lat;
-				for (int i=1; i<lineData.length; i++) {
-					newLineData[i+1] = lineData[i]; // start copying index 1 from old array to index 2 in new array, since 0 and 1 are already full
-				}
-				// make a allLines array one bigger than previous
-				String[][] newAllLines = new String[allLines.length+1][];
-				for (int i=0; i<allLines.length; i++) {
-					newAllLines[i] = allLines[i]; // copy all old line data into new array
-				}
-				newAllLines[allLines.length] = newLineData; // add new line data
-				allLines = newAllLines; // reassign variable to point to new array
-            }
-            else {
-				// the line didn't have point data
-				// System.out.println(String.format("Didn't find coordinates in '%s'.", pointData));
-            }
-		}
+		// hint: ultimately, you want this function to return data structured something like the following (you can structure your array differently if you prefer)
+		// in this example, the geospatial Point data (latitude and longitude), which is one field in the original CSV file, has been broken up into two fields... you would be wise to do this too.
+		String[][] allLines = { 
+			// the first two values are the latitude and longitude... these were a single field in the original CSV file
+			{"-73.90459140730678","40.87919896648574","Bronx","1","1","Broadway","West 231st Street","Naples Terrace","N","1189","4094","2508","734","2646","2939","802","4015","2631","1125","4310","3420","1001","3475","2832","991","4262","2469","1010","3609","3128","863","4119","2217","997","4440","2687","1328","3820","2428","1288","3328","3365","1268","4315","2276","1210","4710","3825","1206","4590","3008","1220","4384","2641","1450","4646","2996","1788","4980","3033","1204","4520","2999","1246","4531","2686","1309","3642","2830","1916","5893","2776","1111","4044","2731","1271","4502","2899","1708","4464","2967","","","","486","2843","1754","630","3262","4710"},
+			{"-73.92188432870218","40.82662794123294","Bronx","2","2","East 161st Street","Grand Concourse","Sheridan Avenue","Y","1511","3184","1971","1855","3754","1183","1136","2638","1522","1939","3283","1383","1351","3111","1304","1227","3137","2762","2077","3283","1409","1007","3069","1477","1734","3333","1772","2051","3525","1752","1233","1875","1912","2113","4099","1970","2278","4215","2288","2071","3890","1832","2206","4363","2315","1949","4435","2388","2318","4589","2483","2005","4790","2512","2053","4721","2311","2109","5485","2548","1848","4920","2143","2389","5952","2832","1749","5148","2156","2006","4723","1604","1702","4347","1576","780","1892","1287","1405","2097","8410"},
+			{"-73.92785197149036","40.80034506063933","Harlem River Bridges","113","113","Triborough Bridge (Manhattan span)","midpoint","","N","17","35","34","11","44","24","30","44","16","30","200","23","37","44","23","20","174","66","12","39","55","36","205","64","10","45","11","7","119","39","26","21","49","6","33","15","12","42","16","13","31","40","14","32","10","21","42","20","19","36","14","17","40","28","10","18","8","21","43","21","7","19","5","16","38","24","6","14","4","12","15","6","","","","","","","23","52","6437"},
+			{"-73.93686603590555","40.78611224350854","Harlem River Bridges","114","114","Wards Island Bridge","midpoint","","N","57","207","71","63","186","149","45","203","113","80","190","120","33","213","324","43","151","173","37","169","674","77","205","913","32","66","70","62","189","936","78","249","439","102","460","569","191","455","435","92","514","594","164","527","312","123","458","564","189","539","312","117","424","581","160","484","300","159","490","587","169","493","312","178","519","608","187","543","351","213","490","263","","","","","","","237","405","6353"}
+		};
 
-		// ultimately, you want this function to return data structured something like the following (you can structure your array differently if you prefer)
-		// in this example, the geospatial Point data (latitude and longitude), which is one field in the original CSV file, has been broken up into two fields... you should do this too.
-		// String[][] allLines = { 
-		// 	// the first two values are the latitude and longitude... these were a single field in the original CSV file
-		// 	{"-73.90459140730678","40.87919896648574","Bronx","1","1","Broadway","West 231st Street","Naples Terrace","N","1189","4094","2508","734","2646","2939","802","4015","2631","1125","4310","3420","1001","3475","2832","991","4262","2469","1010","3609","3128","863","4119","2217","997","4440","2687","1328","3820","2428","1288","3328","3365","1268","4315","2276","1210","4710","3825","1206","4590","3008","1220","4384","2641","1450","4646","2996","1788","4980","3033","1204","4520","2999","1246","4531","2686","1309","3642","2830","1916","5893","2776","1111","4044","2731","1271","4502","2899","1708","4464","2967","","","","486","2843","1754","630","3262","4710"},
-		// 	{"-73.92188432870218","40.82662794123294","Bronx","2","2","East 161st Street","Grand Concourse","Sheridan Avenue","Y","1511","3184","1971","1855","3754","1183","1136","2638","1522","1939","3283","1383","1351","3111","1304","1227","3137","2762","2077","3283","1409","1007","3069","1477","1734","3333","1772","2051","3525","1752","1233","1875","1912","2113","4099","1970","2278","4215","2288","2071","3890","1832","2206","4363","2315","1949","4435","2388","2318","4589","2483","2005","4790","2512","2053","4721","2311","2109","5485","2548","1848","4920","2143","2389","5952","2832","1749","5148","2156","2006","4723","1604","1702","4347","1576","780","1892","1287","1405","2097","8410"},
-		// 	{"-73.92785197149036","40.80034506063933","Harlem River Bridges","113","113","Triborough Bridge (Manhattan span)","midpoint","","N","17","35","34","11","44","24","30","44","16","30","200","23","37","44","23","20","174","66","12","39","55","36","205","64","10","45","11","7","119","39","26","21","49","6","33","15","12","42","16","13","31","40","14","32","10","21","42","20","19","36","14","17","40","28","10","18","8","21","43","21","7","19","5","16","38","24","6","14","4","12","15","6","","","","","","","23","52","6437"},
-		// 	{"-73.93686603590555","40.78611224350854","Harlem River Bridges","114","114","Wards Island Bridge","midpoint","","N","57","207","71","63","186","149","45","203","113","80","190","120","33","213","324","43","151","173","37","169","674","77","205","913","32","66","70","62","189","936","78","249","439","102","460","569","191","455","435","92","514","594","164","527","312","123","458","564","189","539","312","117","424","581","160","484","300","159","490","587","169","493","312","178","519","608","187","543","351","213","490","263","","","","","","","237","405","6353"}
-		// };
-
-		return allLines;
 	}
 
 
