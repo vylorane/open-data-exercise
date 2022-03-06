@@ -27,8 +27,8 @@ public class App extends PApplet {
 	/****************************************************************/
 	/*                  BEGIN - DON'T MODIFY THIS CODE              */
 	/****************************************************************/
-	UnfoldingMap map;
-	final float SCALE_FACTOR = 0.0002f; // how much to scale pedestrian counts to calculate a reasonable radius for a marker on the map
+	UnfoldingMap map; // will be a reference to the actual map
+	final float SCALE_FACTOR = 0.0002f; // a factor used to scale pedestrian counts to calculate a reasonable radius for a bubble marker on the map
 	final int DEFAULT_ZOOM_LEVEL = 11;
 	final Location DEFAULT_LOCATION = new Location(40.7286683f, -73.997895f); // a hard-coded NYC location to start with
 	String[][] data; // will hold data extracted from the CSV data file
@@ -37,63 +37,15 @@ public class App extends PApplet {
 	/****************************************************************/
 
 	/**
-	 * This method will be automatically called when the program runs
-	 * Put any initial setup of the window, the map, and markers here.
-	 */
-	public void setup() {
-		/****************************************************************/
-		/*                  BEGIN - DON'T MODIFY THIS CODE              */
-		/****************************************************************/
-		size(1200, 800, P2D); // set the map window size, using the OpenGL 2D rendering engine
-		// size(1200, 800); // set the map window size, using Java's default rendering engine (try this if the OpenGL doesn't work for you)
-		map = getMap(); // create the map and store it in the global-ish map variable
-
-		// load the data from the file... you will have to complete the functions called to make sure this works
-		String[] lines = getLinesFromFile("data/PedCountLocationsMay2015.csv"); // get an array of the lines from the file
-		data = getDataFromLines(lines); // get a two-dimensional array of the data in these lines; complete the getDataFromLines method so the data from the file is returned appropriately
-		// System.out.println(Arrays.deepToString(data)); // for debugging
-
-		// automatically zoom and pan into the New York City location
-		map.zoomAndPanTo(DEFAULT_ZOOM_LEVEL, DEFAULT_LOCATION);
-		/****************************************************************/
-		/*                    END - DON'T MODIFY THIS CODE              */
-		/****************************************************************/
-
-		// by default, show markers for the morning counts in May 2021 (the third-to-last field in the CSV file)
-		showMay2021MorningCounts(data);
-
-		// various ways to zoom in / out
-		// map.zoomLevelOut();
-		// map.zoomLevelIn();
-		// map.zoomIn();
-		// map.zoomOut();
-
-		// it's possible to pan to a location or a position on the screen
-		// map.panTo(nycLocation); // pan to NYC
-		// ScreenPosition screenPosition = new ScreenPosition(100, 100);
-		// map.panTo(screenPosition); // pan to a position on the screen
-
-		// zoom and pan into a location
-		// int zoomLevel = 10;
-		// map.zoomAndPanTo(zoomLevel, nycLocation);
-
-		// it is possible to restrict zooming and panning
-		// float maxPanningDistance = 30; // in km
-		// map.setPanningRestriction(nycLocation, maxPanningDistance);
-		// map.setZoomRange(5, 22);
-
-	} // setup
-
-	/**
 	 * This method is automatically called every time the user presses a key while viewing the map.
 	 * The `key` variable (type char) is automatically is assigned the value of the key that was pressed.
 	 * Complete the functions called from here, such that:
-	 * 	- when the user presses the `1` key, the map shows the morning counts in May 2021, with blue bubble markers.
-	 * 	- when the user presses the `2` key, the map shows the evening counts in May 2021, with blue bubble markers.
-	 * 	- when the user presses the `3` key, the map shows the difference between the evening and morning counts in May 2021.  If the evening count is greater, the marker should be a green bubble, otherwise, the marker should be a red bubble.
-	 * 	- when the user presses the `4` key, the map shows the difference between the average of the evening and morning counts in May 2021 and the average of the evening and morning counts in May 2019.  If the counts for 2021 are greater, the marker should be a green bubble, otherwise, the marker should be a red bubble.
-	 * 	- when the user presses the `5` key, the map shows data of your choosing, visualized with marker types of your choosing.
-	 * 	- when the user presses the `6` key, the map shows data of your choosing, visualized with marker types of your choosing.
+	 * 	- when the user presses the `1` key, the code calls the showMay2021MorningCounts method to show the morning counts in May 2021, with blue bubble markers on the map.
+	 * 	- when the user presses the `2` key, the code calls the showMay2021EveningCounts method to show the evening counts in May 2021, with blue bubble markers on the map.
+	 * 	- when the user presses the `3` key, the code calls the showMay2021EveningMorningCountsDifferencemethod to show the difference between the evening and morning counts in May 2021.  If the evening count is greater, the marker should be a green bubble, otherwise, the marker should be a red bubble.
+	 * 	- when the user presses the `4` key, the code calls the showMay2021VersusMay2019Counts method to show the difference between the average of the evening and morning counts in May 2021 and the average of the evening and morning counts in May 2019.  If the counts for 2021 are greater, the marker should be a green bubble, otherwise, the marker should be a red bubble.
+	 * 	- when the user presses the `5` key, the code calls the customVisualization1 method to show data of your choosing, visualized with marker types of your choosing.
+	 * 	- when the user presses the `6` key, the code calls the customVisualization2 method to show data of your choosing, visualized with marker types of your choosing.
 	 */
 	public void keyPressed() {
 		// System.out.println("Key pressed: " + key);
@@ -332,15 +284,14 @@ public class App extends PApplet {
 		// remove the example code below and replace with your own code that solves the problem
 
 		// example of how to create a marker at a specific location and place it on the map
-		// float lat = 41.7286683f;
-		// float lng = -72.9978953f;
-		// Location markerLocation = new Location(lat, lng);
-		// int pedestrianCount = 3021; // a make-believe pedestrian count for example
-		// float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		// float[] markerColor = {255, 0, 0, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		// MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		// map.addMarker(marker);
-		
+		float lat = 40.7472389f;
+		float lng = -73.983934f;
+		Location markerLocation = new Location(lat, lng);
+		int pedestrianCount = 32021; // a make-believe pedestrian count for example
+		float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
+		float[] markerColor = {129, 60, 84, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
+		MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
+		map.addMarker(marker);		
 	}
 
 	/**
@@ -354,14 +305,14 @@ public class App extends PApplet {
 		// remove the example code below and replace with your own code that solves the problem
 
 		// example of how to create a marker at a specific location and place it on the map
-		// float lat = 40.7286683f;
-		// float lng = -73.9978953f;
-		// Location markerLocation = new Location(lat, lng);
-		// int pedestrianCount = 222; // a make-believe pedestrian count for example
-		// float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
-		// float[] markerColor = {0, 127, 255, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
-		// MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
-		// map.addMarker(marker);
+		float lat = 40.7286683f;
+		float lng = -73.9978953f;
+		Location markerLocation = new Location(lat, lng);
+		int pedestrianCount = 20122; // a make-believe pedestrian count for example
+		float markerRadius = pedestrianCount * SCALE_FACTOR; // scale down the marker radius to look better on the map
+		float[] markerColor = {0, 127, 255, 127}; // a color, specified as a combinatino of red, green, blue, and alpha (i.e. transparency), each represented as numbers between 0 and 255.
+		MarkerBubble marker = new MarkerBubble(this, markerLocation, markerRadius, markerColor); // don't worry about the `this` keyword for now... just make sure it's there.
+		map.addMarker(marker);
 		
 	}
 
@@ -452,11 +403,46 @@ public class App extends PApplet {
 	/****************************************************************/
 
 	/**
-	 * Adds markers to the map for the morning pedestrian counts in May 2021.
-	 * These counts are in the third-to-last field in the CSV data file.  So we look at the third-to-last array element in our data array for these values.
-	 * 
-	 * @param data A two-dimensional String array, containing the data from the source CSV file.
+	 * This method will be automatically called when the program runs
+	 * Put any initial setup of the window, the map, and markers here.
 	 */
+	public void setup() {
+		size(1200, 800, P2D); // set the map window size, using the OpenGL 2D rendering engine
+		// size(1200, 800); // set the map window size, using Java's default rendering engine (try this if the OpenGL doesn't work for you)
+		map = getMap(); // create the map and store it in the global-ish map variable
+
+		// load the data from the file... you will have to complete the functions called to make sure this works
+		String[] lines = getLinesFromFile("data/PedCountLocationsMay2015.csv"); // get an array of the lines from the file
+		data = getDataFromLines(lines); // get a two-dimensional array of the data in these lines; complete the getDataFromLines method so the data from the file is returned appropriately
+		// System.out.println(Arrays.deepToString(data)); // for debugging
+
+		// automatically zoom and pan into the New York City location
+		map.zoomAndPanTo(DEFAULT_ZOOM_LEVEL, DEFAULT_LOCATION);
+
+		// by default, show markers for the morning counts in May 2021 (the third-to-last field in the CSV file)
+		showMay2021MorningCounts(data);
+
+		// various ways to zoom in / out
+		// map.zoomLevelOut();
+		// map.zoomLevelIn();
+		// map.zoomIn();
+		// map.zoomOut();
+
+		// it's possible to pan to a location or a position on the screen
+		// map.panTo(nycLocation); // pan to NYC
+		// ScreenPosition screenPosition = new ScreenPosition(100, 100);
+		// map.panTo(screenPosition); // pan to a position on the screen
+
+		// zoom and pan into a location
+		// int zoomLevel = 10;
+		// map.zoomAndPanTo(zoomLevel, nycLocation);
+
+		// it is possible to restrict zooming and panning
+		// float maxPanningDistance = 30; // in km
+		// map.setPanningRestriction(nycLocation, maxPanningDistance);
+		// map.setZoomRange(5, 22);
+
+	} // setup
 
 	/**
 	 * Create a map using a publicly-available map provider.
