@@ -47,12 +47,12 @@ To extract the data from the text file and place it into the correct data format
 
 You will write code to perform `6` different analyses of the data and map the results. Details are left as comments :
 
-1. the pedestrian counts at all locations in the morning in May 2021.
-1. the pedestrian counts at all locations in the evening in May 2021.
-1. the difference between the pedestrian counts in the evening compared to the morning in May 2021.
-1. the difference between the average of the morning/evening pedestrian counts in May 2021 compared to the average of the morning/evening pedestrian counts in May 2019.
-1. another more analyses of your choosing.
-1. another more analyses of your choosing.
+1. the pedestrian counts at all locations in the morning in May 2021. Complete the `showMay2021MorningCounts` method for this.
+1. the pedestrian counts at all locations in the evening in May 2021. Complete the `showMay2021EveningCounts` method for this.
+1. the difference between the pedestrian counts in the evening compared to the morning in May 2021. Complete the `showMay2021EveningMorningCountsDifference` method for this.
+1. the difference between the average of the morning/evening pedestrian counts in May 2021 compared to the average of the morning/evening pedestrian counts in May 2019. Complete the `showMay2021VersusMay2019Counts` method for this.
+1. another more analyses of your choosing. Complete the `customVisualization1` method for this.
+1. another more analyses of your choosing. Complete the `customVisualization1` method for this.
 
 In all cases, if data required by the analysis is missing for any given location in the original data set, a marker should not be placed at that location on the map.
 
@@ -75,6 +75,8 @@ MarkerBubble marker = new MarkerBubble(this, location, radius, fillColor); // do
 map.addMarker(marker); // add marker to the map, assuming the map variable has been declared earlier.
 ```
 
+Example of how to place an image marker at a specific location:
+
 ```java
 // place an image marker on the map, with a given image file
 float radius = 300;
@@ -87,7 +89,7 @@ map.addMarker(marker); // add marker to the map, assuming the map variable has b
 
 While viewing the map, the user must be able to select which of the visualizations to view by typing the letters `1` through `6` on the keyboard.
 
-- A function named `keyPressed()` has been given to you in the code.
+- A method named `keyPressed` has been given to you in the code.
 - This function will be automatically run every time the user presses a key.
 - Comments in the code indicate how to detect which key was pressed.
 
