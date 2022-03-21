@@ -190,7 +190,7 @@ public class App extends PApplet {
 		map = getMap(); // create the map and store it in the global-ish map variable
 
 		// load the data from the file... you will have to complete the functions called to make sure this works
-		String[] lines = getLinesFromFile("data/PedCountLocationsMay2015.csv"); // get an array of the lines from the file
+		String[] lines = getLinesFromFile("data/PedCountLocationsMay2015.csv"); // get an array of the lines from the file... Windows users should replace this with "data\\PedCountLocationsMay2015.csv"
 		data = getDataFromLines(lines); // get a two-dimensional array of the data in these lines; complete the getDataFromLines method so the data from the file is returned appropriately
 		// System.out.println(Arrays.deepToString(data)); // for debugging
 

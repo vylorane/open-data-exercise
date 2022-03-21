@@ -80,10 +80,16 @@ Example of how to place an image marker at a specific location:
 ```java
 // place an image marker on the map, with a given image file
 float radius = 300;
-String filepath = "images/marker_blue.png";
+String filepath = "images/marker_blue.png"; // windows users should use backslashes \ instead of forward slash / in all file paths
 MarkerBubble marker = new MarkerImage(this, location, filepath); // don't worry about the `this` keyword for now... just make sure it's there.
 map.addMarker(marker); // add marker to the map, assuming the map variable has been declared earlier.
 ```
+
+## Note about Windows file paths
+
+Several places in the given code refer to file paths using standard UNIX/Linux/MacOS file path syntax, where forward slashes (`/`) represent directory separators. For example, the code in the `setup` method contains the file path, `"data/PedCountLocationsMay2015.csv"`. One of Java's shortcomings is that it has no easy-to-use library for standardizing file paths to be cross-platform compatible.
+
+Windows users will have to replace any forward slashes with escaped back slashes (`\\`), e.g. `"data\\PedCountLocationsMay2015.csv"`.
 
 ## Interactivity
 
@@ -91,7 +97,8 @@ While viewing the map, the user must be able to select which of the visualizatio
 
 - A method named `keyPressed` has been given to you in the code.
 - This function will be automatically run every time the user presses a key.
-- Comments in the code indicate how to detect which key was pressed.
+- Comments in the code indicate how to detect which key was pressed using the `key` variable.
+- The key that was pressed is represented as a `char` data type.
 
 ## Technical requirements
 
@@ -100,7 +107,7 @@ This project depends upon the [Unfolding](http://unfoldingmaps.org/) library, wh
 However, Processing currently works only with Java 8. In order to have the Java Extensions for Visual Studio Code run the program with Java 8, instead of any newer version, you must do the following:
 
 1. Download and install the j[dk8u242-b08 version of OpenJDK 8](https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/tag/jdk8u242-b08) - on MacOS, select the appropriate `.pkg` file; for Windows, select the appropriate `.msi` file (be sure to select the file with `jdk` in its name, not the one with `jre` in its name).
-1. Note the file path to the `Contents/Home` sub-directory where this new JDK was installed. On Mac, it is probably in `"/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"`. On Windows, it will be in a similar directory. We'll refer to this directory later as `THE_PATH_TO_JDK_8`.
+1. Note the file path to the `Contents/Home` sub-directory where this new JDK was installed. On Mac, it is probably in `"/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"`. On Windows, it will be in a similar directory, probably `C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.242.08-hotspot`, which would have to have its back slashes escaped to be `"C:\\Program Files (x86)\\AdoptOpenJDK\\jdk-8.0.242.08-hotspot"` in the settings file. We'll refer to this directory later as `THE_PATH_TO_JDK_8`.
 1. In Visual Studio Code, go to Settings (MacOS: `Code`->`Preferences`->`Settings`; Windows: `File`->`Preferences`->`Settings`), and enter "`java jdt ls java home` in the search field. You should see an option with a link to `Edit in settings.json` - click that link to open that file in the editor.
 1. In the `settings.json`, edit the "`java.configuration.runtimes`" setting so that it includes the new JDK. If an existing JDK is listed there, you an keep both. For example (replace `THE_PATH_TO_JDK_8` with the correct path for your newly-installed JDK) :
    ```javascript
