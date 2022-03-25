@@ -298,9 +298,14 @@ public class App extends PApplet {
 	 * @param args A String array of command-line arguments.
 	 */
 	public static void main(String[] args) {
-		File javaDirectory = SystemUtils.getJavaHome();
-		System.out.printf("\n###  JDK in use ###\n%s\n### ^JDK in use ###\n\n", javaDirectory);
-		PApplet.main("edu.nyu.cs.App"); // do not modify this!
+		System.out.printf("\n###  JDK IN USE ###\n- Version: %s\n- Location: %s\n### ^JDK IN USE ###\n\n", SystemUtils.JAVA_VERSION, SystemUtils.getJavaHome());
+		boolean isGoodJDK = SystemUtils.IS_JAVA_1_8;
+		if (!isGoodJDK) {
+			System.out.printf("Fatal Error: YOU MUST USE JAVA 1.8, not %s!!!\n", SystemUtils.JAVA_VERSION);
+		}
+		else {
+			PApplet.main("edu.nyu.cs.App"); // do not modify this!
+		}
 	}
 
 }
