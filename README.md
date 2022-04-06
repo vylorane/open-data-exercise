@@ -85,12 +85,6 @@ MarkerBubble marker = new MarkerImage(this, location, filepath); // don't worry 
 map.addMarker(marker); // add marker to the map, assuming the map variable has been declared earlier.
 ```
 
-## Note about Windows file paths
-
-Several places in the given code refer to file paths using standard UNIX/Linux/MacOS file path syntax, where forward slashes (`/`) represent directory separators. For example, the code in the `setup` method contains the file path, `"data/PedCountLocationsMay2015.csv"`. One of Java's shortcomings is that it has no easy-to-use library for standardizing file paths to be cross-platform compatible.
-
-Windows users will have to replace any forward slashes with escaped back slashes (`\\`), e.g. `"data\\PedCountLocationsMay2015.csv"`.
-
 ## Interactivity
 
 While viewing the map, the user must be able to select which of the visualizations to view by typing the letters `1` through `6` on the keyboard.
